@@ -14,8 +14,8 @@ def build_vlan_list(vlan_file):
             vlan_sum.append([int(split_columns[0]),split_columns[1]])
     return vlan_sum
 
-def unique_vlans(vlan_file, fct):
-    vlan_sum = fct(vlan_file)
+def unique_vlans(vlan_file):
+    vlan_sum = build_vlan_list(vlan_file)
     unique_list = []
 
     for x in vlan_sum:
@@ -27,7 +27,7 @@ def sort_vlans(vlan_list):
     return sorted(vlan_list, key=itemgetter(0))
 
 def main():
-    unique = unique_vlans('vlans.txt', build_vlan_list)
+    unique = unique_vlans('vlans.txt')
     final_sort = sort_vlans(unique)
     with open('vlans_sorted.txt', 'w') as file:
         for vlan in final_sort:
